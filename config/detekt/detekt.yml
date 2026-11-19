@@ -1,0 +1,24 @@
+# Builds on detekt's default config (buildUponDefaultConfig = true). Only deviations are listed.
+# Compose conventions: PascalCase @Composable functions, many parameters with defaults, previews.
+complexity:
+  LongParameterList:
+    functionThreshold: 8
+    ignoreDefaultParameters: true
+  TooManyFunctions:
+    ignorePrivate: true
+    ignoreAnnotatedFunctions: ['Preview', 'PreviewLightDark']
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+
+style:
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    ignoreAnnotated: ['Preview', 'PreviewLightDark']
+    excludes: ['**/test/**', '**/androidTest/**', '**/build-logic/**']
+  MaxLineLength:
+    maxLineLength: 120
+  UnusedPrivateMember:
+    ignoreAnnotated: ['Preview', 'PreviewLightDark']

@@ -1,0 +1,54 @@
+name: Detection problem
+description: Unreel blocked something it shouldn't have, or missed a Reels/Shorts feed.
+title: "detection: "
+labels: ["type:bug", "area:detection"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Please **don't paste screenshots that show usernames, captions, messages or faces**.
+        Describe the screen in words instead.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What went wrong?
+      options:
+        - "False positive: Unreel stepped in on a screen that isn't a short-form feed"
+        - "Missed: Unreel didn't notice a Reels/Shorts feed"
+    validations:
+      required: true
+  - type: dropdown
+    id: app
+    attributes:
+      label: App
+      options: ["Instagram", "YouTube", "Other"]
+    validations:
+      required: true
+  - type: input
+    id: app_version
+    attributes:
+      label: App version
+      description: Settings → Apps → (app) → App details, at the bottom.
+      placeholder: "Instagram 410.0.0.42.71"
+    validations:
+      required: true
+  - type: textarea
+    id: screen
+    attributes:
+      label: Which screen were you on, and how did you get there?
+      placeholder: "Opened a reel a friend sent in DMs, then pressed back to the chat"
+    validations:
+      required: true
+  - type: input
+    id: unreel_version
+    attributes:
+      label: Unreel version
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: "Galaxy S25 FE, Android 17"
+    validations:
+      required: true

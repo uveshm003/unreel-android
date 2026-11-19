@@ -1,0 +1,52 @@
+name: Bug report
+description: Something in Unreel doesn't work as expected.
+title: "fix: "
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: "Pixel 9, Android 17"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Unreel version
+      description: Settings → About, or the release tag.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: ["Detection", "Pause overlay", "Hard block", "Budgets", "Schedules", "Commitment lock", "Insights", "Widget / Quick Settings tile", "Onboarding / permissions", "Settings / export", "Other"]
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: "`adb logcat` excerpts or screenshots. Remove usernames, captions, messages and anything else personal."
+      render: text

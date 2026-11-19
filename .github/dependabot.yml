@@ -1,0 +1,37 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels: ["type:chore", "area:infra"]
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      kotlin-toolchain:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "com.google.devtools.ksp*"
+          - "com.android.tools.build*"
+          - "com.android.application"
+          - "com.android.library"
+          - "com.android.test"
+          - "com.android.lint"
+      androidx:
+        patterns:
+          - "androidx.*"
+      everything-else:
+        patterns:
+          - "*"
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    labels: ["type:chore", "area:infra"]
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      actions:
+        patterns:
+          - "*"

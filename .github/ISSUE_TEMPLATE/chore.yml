@@ -1,0 +1,23 @@
+name: Chore
+description: Build, tooling, docs, refactoring or tech debt.
+title: "chore: "
+labels: ["type:chore"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What and why
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes

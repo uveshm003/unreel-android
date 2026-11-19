@@ -1,0 +1,37 @@
+# Gradle / build outputs
+.gradle/
+.kotlin/
+build/
+!src/**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local config (SDK path, secrets)
+local.properties
+*.env
+.env*
+
+# Signing material: never commit keystores (release signing comes from CI secrets)
+*.jks
+*.keystore
+*.p12
+*.pem
+keystore.properties
+
+# IDE
+*.iml
+.idea/
+.vscode/
+.fleet/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code: personal settings stay local; shared settings and agents are committed
+.claude/settings.local.json
+
+# Roborazzi comparison artefacts (goldens in src/test/screenshots are committed)
+**/src/test/screenshots/*_compare.png
+**/src/test/screenshots/*_actual.png

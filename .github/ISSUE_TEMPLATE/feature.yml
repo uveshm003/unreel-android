@@ -1,0 +1,46 @@
+name: Feature
+description: A user-facing capability or a technical building block, sized for one PR.
+title: "feat: "
+labels: ["type:feature"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What problem this solves and where it fits (link the brief section or ADR).
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Testable checkboxes. Each one must be verifiable by a test, a screenshot or a device step.
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Technical notes
+      description: Modules touched, APIs to verify on developer.android.com, edge cases, ADRs needed.
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test plan
+      description: Unit / Robolectric / screenshot / instrumented / manual device steps.
+    validations:
+      required: true
+  - type: input
+    id: dependencies
+    attributes:
+      label: Dependencies
+      placeholder: "Blocked by #12, #14"
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      description: S < 100 changed lines, M < 250, L ≤ 400. Split anything bigger.
+      options: ["S", "M", "L"]
+    validations:
+      required: true
