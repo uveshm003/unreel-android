@@ -121,6 +121,7 @@ graph TD
     core_datastore --> core_model
     core_detection --> core_model
     core_testing --> core_common
+    core_testing --> core_designsystem
     core_testing --> core_model
     core_ui --> core_designsystem
     core_ui --> core_model
