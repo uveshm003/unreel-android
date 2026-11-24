@@ -17,16 +17,46 @@ Data (:core:data repositories)                           the single source of tr
 Sources (:core:database Room, :core:datastore DataStore, platform managers)
 ```
 
-The accessibility side follows the same rule: **the service is thin.**
+## Detection pipeline
 
+The following sequence describes the planned service. Feature screens and the service share the same
+repository contracts. A change to the Apps screen therefore reaches the next policy decision without
+restarting the service.
+
+```mermaid
+sequenceDiagram
+    participant UI as Settings screen
+    participant Repo as Protection repository
+    participant OS as Android
+    participant S as Accessibility service
+    participant D as Detection engine
+    participant P as Intervention policy
+    UI->>Repo: Request a protection change
+    Repo->>Repo: Validate lock and write in one transaction
+    Repo-->>S: Emit updated policy settings
+    OS->>S: Accessibility event
+    S->>S: Filter supported package and event type, coalesce updates
+    S->>S: Take a bounded snapshot of the current window
+    S->>D: Match immutable snapshot against package rules
+    D-->>S: Surface and swipe classification
+    S->>P: Evaluate classification against current settings and budget
+    P-->>S: Requested intervention
+    S->>S: Confirm window and decision are still current
+    S->>OS: Perform action when an intervention is required
 ```
-AccessibilityEvent ──► :service:accessibility ──► NodeSnapshot ──► :core:detection ──► DetectedSurface
-   (filtered by package     builds a capped,            (pure Kotlin,            + isSwipeToNext
-    and event type,         debounced snapshot          rules are JSON data)          │
-    debounced)                                                                        ▼
-                         action executor ◄── injected policy (protection level, budget, schedule, lock)
-                         (BACK / overlay)
-```
+
+### Threading and lifetime
+
+The main-thread callback filters events and schedules a snapshot. Read live accessibility nodes on
+the service thread and copy only the fields detection needs before handing the snapshot to the
+injected computation dispatcher. The engine consumes ordinary Kotlin values. Apply platform actions
+on the main thread. If the window or package changes while matching is in flight, discard the stale
+result. Cancel outstanding jobs and settings collection when the service disconnects.
+
+Repositories expose flows backed by Room and DataStore. The service collects protection settings once
+per connection and holds the latest snapshot in memory. Wait for the initial settings before acting.
+An event callback can then evaluate policy without a disk read. A rejected settings edit leaves the
+previous policy in effect. Session recording and aggregation use asynchronous database operations.
 
 ## Modules
 
@@ -36,8 +66,8 @@ AccessibilityEvent ──► :service:accessibility ──► NodeSnapshot ─�
 | `:core:common` | Dispatchers, result types, `Clock`; pure Kotlin |
 | `:core:model` | Plain data types shared across layers; pure Kotlin |
 | `:core:detection` | Feed detection engine: `NodeSnapshot` + rules (JSON) → `DetectedSurface`; pure Kotlin, ≥ 80 % coverage |
-| `:core:database` | Room database (feed sessions, aggregates); schemas exported to `core/database/schemas` |
-| `:core:datastore` | DataStore for settings |
+| `:core:database` | Room database (protection policy, feed sessions, aggregates); schemas exported to `core/database/schemas` |
+| `:core:datastore` | DataStore for preferences and setup progress |
 | `:core:data` | Repositories over the sources above |
 | `:core:designsystem` | Material 3 theme, typography, core components |
 | `:core:ui` | Shared composables that know about the model |
