@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name" translatable="false">Unreel</string>
-    <string name="app_tagline">Block the feed, not the app.</string>
-    <string name="app_shell_placeholder">Unreel is being built. Detection, interventions and insights arrive in the next milestones.</string>
 </resources>

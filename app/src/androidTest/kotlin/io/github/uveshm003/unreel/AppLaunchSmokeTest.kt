@@ -16,7 +16,9 @@ class AppLaunchSmokeTest {
 
     @Test
     fun appLaunches_andRendersShell() {
-        val tagline = composeRule.activity.getString(R.string.app_tagline)
-        composeRule.onNodeWithText(tagline).assertIsDisplayed()
+        val description = composeRule.activity.getString(
+            io.github.uveshm003.unreel.feature.home.R.string.home_description,
+        )
+        composeRule.onNodeWithText(description).assertIsDisplayed()
     }
 }
