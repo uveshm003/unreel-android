@@ -6,14 +6,19 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.test.core.app.ApplicationProvider
 import io.github.uveshm003.unreel.core.testing.ScreenshotSuite
 import io.github.uveshm003.unreel.feature.home.R
+import io.github.uveshm003.unreel.feature.settings.SettingsRoute
 import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.robolectric.annotation.Config
@@ -21,6 +26,18 @@ import org.robolectric.annotation.Config
 class UnreelAppScreenshotTest : ScreenshotSuite("unreel_app") {
     @Composable
     override fun Screen() = UnreelApp()
+
+    @Test
+    @Config(qualifiers = "w720dp-h240dp-land-notnight-mdpi")
+    fun shortRailCanScrollToSettingsAndBackToHome() {
+        setScreenshotContent(darkTheme = false, fontScale = 2f)
+        for (label in listOf(SettingsRoute.label, R.string.home_label)) {
+            val tab = composeRule.onNode(hasText(composeRule.activity.getString(label)) and hasClickAction())
+            tab.performScrollTo().assertIsDisplayed().performTouchInput { click() }
+            tab.assertIsSelected()
+        }
+        captureCurrentScreen("short_rail_large_font")
+    }
 
     @Test
     @Config(qualifiers = "w480dp-h220dp-land-notnight-mdpi")
