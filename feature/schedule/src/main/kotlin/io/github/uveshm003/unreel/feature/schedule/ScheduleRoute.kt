@@ -16,7 +16,7 @@ data object ScheduleRoute : TopLevelDestination {
 }
 
 @Serializable
-private data object ScheduleOverview
+internal data object ScheduleOverview
 
 fun NavGraphBuilder.scheduleScreen() {
     navigation<ScheduleRoute>(startDestination = ScheduleOverview) {

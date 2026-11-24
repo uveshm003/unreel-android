@@ -16,7 +16,7 @@ data object InsightsRoute : TopLevelDestination {
 }
 
 @Serializable
-private data object InsightsOverview
+internal data object InsightsOverview
 
 fun NavGraphBuilder.insightsScreen() {
     navigation<InsightsRoute>(startDestination = InsightsOverview) {

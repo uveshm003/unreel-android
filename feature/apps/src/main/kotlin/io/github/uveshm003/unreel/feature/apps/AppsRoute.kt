@@ -16,7 +16,7 @@ data object AppsRoute : TopLevelDestination {
 }
 
 @Serializable
-private data object AppsOverview
+internal data object AppsOverview
 
 fun NavGraphBuilder.appsScreen() {
     navigation<AppsRoute>(startDestination = AppsOverview) {

@@ -16,7 +16,7 @@ data object HomeRoute : TopLevelDestination {
 }
 
 @Serializable
-private data object HomeOverview
+internal data object HomeOverview
 
 fun NavGraphBuilder.homeScreen() {
     navigation<HomeRoute>(startDestination = HomeOverview) {

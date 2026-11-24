@@ -16,7 +16,7 @@ data object SettingsRoute : TopLevelDestination {
 }
 
 @Serializable
-private data object SettingsOverview
+internal data object SettingsOverview
 
 fun NavGraphBuilder.settingsScreen() {
     navigation<SettingsRoute>(startDestination = SettingsOverview) {
