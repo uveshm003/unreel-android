@@ -9,6 +9,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.uveshm003.unreel.core.designsystem.theme.UnreelTheme
+import io.github.uveshm003.unreel.feature.onboarding.OnboardingGate
 import io.github.uveshm003.unreel.ui.UnreelApp
 
 @AndroidEntryPoint
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             UnreelTheme(darkTheme = darkTheme) {
-                UnreelApp()
+                OnboardingGate { UnreelApp() }
             }
         }
     }
