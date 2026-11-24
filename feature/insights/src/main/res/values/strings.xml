@@ -1,0 +1,4 @@
+<resources>
+    <string name="insights_label">Insights</string>
+    <string name="insights_description">See how your time in short-form feeds changes from day to day.</string>
+</resources>

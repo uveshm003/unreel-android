@@ -1,0 +1,4 @@
+<resources>
+    <string name="settings_label">Settings</string>
+    <string name="settings_description">Your appearance, language and data preferences will appear here.</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="apps_label">Apps</string>
+    <string name="apps_description">Choose how Unreel responds when you open a short-form feed in each app.</string>
+</resources>

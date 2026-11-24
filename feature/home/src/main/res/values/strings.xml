@@ -1,0 +1,4 @@
+<resources>
+    <string name="home_label">Home</string>
+    <string name="home_description">Your protection status and today’s feed time will appear here.</string>
+</resources>

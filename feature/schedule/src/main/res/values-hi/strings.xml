@@ -1,0 +1,4 @@
+<resources>
+    <string name="schedule_label">समय-सारणी</string>
+    <string name="schedule_description">यहाँ वे समय दिखेंगे जब फ़ीड पर अतिरिक्त सुरक्षा लागू होगी।</string>
+</resources>
