@@ -21,4 +21,12 @@
     <string name="settings_browser_error">Could not open the page in a browser.</string>
     <string name="settings_storage_error">Could not read or save appearance preferences.</string>
     <string name="settings_retry">Reload preferences</string>
+    <string name="report_intro">Choose the app. You can review and edit these details on GitHub before submitting a report.</string>
+    <string name="report_app_version">App version: %1$s</string>
+    <string name="report_unknown">Enter on GitHub</string>
+    <string name="report_no_browser">A browser could not open the form. Copy the link to open it elsewhere.</string>
+    <string name="report_open">Open GitHub</string>
+    <string name="report_copy">Copy report link</string>
+    <string name="report_other">Other app</string>
+    <string name="report_unreel_version">Unreel version: %1$s</string>
 </resources>

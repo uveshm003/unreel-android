@@ -21,4 +21,12 @@
     <string name="settings_browser_error">ब्राउज़र में पेज नहीं खुल पाया।</string>
     <string name="settings_storage_error">दिखावट की सेटिंग्स पढ़ी या सहेजी नहीं जा सकीं।</string>
     <string name="settings_retry">सेटिंग्स दोबारा लोड करें</string>
+    <string name="report_intro">ऐप चुनें। रिपोर्ट भेजने से पहले आप GitHub पर ये विवरण जाँच और बदल सकते हैं।</string>
+    <string name="report_app_version">ऐप संस्करण: %1$s</string>
+    <string name="report_unknown">GitHub पर भरें</string>
+    <string name="report_no_browser">ब्राउज़र में फ़ॉर्म नहीं खुल पाया। लिंक कॉपी करके किसी दूसरे ब्राउज़र में खोलें।</string>
+    <string name="report_open">GitHub खोलें</string>
+    <string name="report_copy">रिपोर्ट लिंक कॉपी करें</string>
+    <string name="report_other">दूसरा ऐप</string>
+    <string name="report_unreel_version">Unreel संस्करण: %1$s</string>
 </resources>

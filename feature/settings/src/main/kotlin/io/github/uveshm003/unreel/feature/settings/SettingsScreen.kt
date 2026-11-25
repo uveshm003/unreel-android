@@ -93,8 +93,9 @@ fun SettingsScreen(
                 LanguageSetting()
                 AboutSettings(version)
                 SectionHeading(R.string.settings_data)
+                ReportProblemAction(version)
                 Text(stringResource(R.string.settings_planned), style = MaterialTheme.typography.bodyMedium)
-                listOf(R.string.settings_export, R.string.settings_reset, R.string.settings_report).forEach { label ->
+                listOf(R.string.settings_export, R.string.settings_reset).forEach { label ->
                     TextButton(onClick = {}, enabled = false) { Text(stringResource(label)) }
                 }
             }
