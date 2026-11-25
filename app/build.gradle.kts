@@ -7,6 +7,8 @@ plugins {
 android {
     namespace = "io.github.uveshm003.unreel"
 
+    buildFeatures.buildConfig = true
+
     defaultConfig {
         applicationId = "io.github.uveshm003.unreel"
         // CI passes these from the git tag (release.yml); local builds use the defaults.
@@ -53,6 +55,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
     implementation(projects.core.designsystem)
     implementation(projects.core.ui)
     implementation(projects.core.data)

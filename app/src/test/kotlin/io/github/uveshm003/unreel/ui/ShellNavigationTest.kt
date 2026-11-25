@@ -16,6 +16,8 @@ import io.github.uveshm003.unreel.feature.home.HomeRoute
 import io.github.uveshm003.unreel.feature.insights.InsightsRoute
 import io.github.uveshm003.unreel.feature.schedule.ScheduleRoute
 import io.github.uveshm003.unreel.feature.settings.SettingsRoute
+import io.github.uveshm003.unreel.feature.settings.SettingsScreen
+import io.github.uveshm003.unreel.feature.settings.SettingsUiState
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,7 +28,7 @@ class ShellNavigationTest {
 
     @Test
     fun allTabsOpenAndBackReturnsDirectlyHome() {
-        composeRule.setContent { UnreelTheme { UnreelApp() } }
+        composeRule.setContent { UnreelTheme { UnreelApp { SettingsScreen(SettingsUiState(), "test", {}, {}, {}) } } }
         val tabs = listOf(AppsRoute, ScheduleRoute, InsightsRoute, SettingsRoute, HomeRoute)
         for (route in tabs) {
             val label = composeRule.activity.getString(route.label)

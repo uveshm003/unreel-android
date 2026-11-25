@@ -1,11 +1,9 @@
 package io.github.uveshm003.unreel.feature.settings
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import io.github.uveshm003.unreel.core.ui.DestinationPlaceholder
 import io.github.uveshm003.unreel.core.ui.TopLevelDestination
 import kotlinx.serialization.Serializable
 
@@ -18,13 +16,8 @@ data object SettingsRoute : TopLevelDestination {
 @Serializable
 internal data object SettingsOverview
 
-fun NavGraphBuilder.settingsScreen() {
+fun NavGraphBuilder.settingsScreen(content: @Composable () -> Unit) {
     navigation<SettingsRoute>(startDestination = SettingsOverview) {
-        composable<SettingsOverview> { SettingsScreen() }
+        composable<SettingsOverview> { content() }
     }
-}
-
-@Composable
-internal fun SettingsScreen() {
-    DestinationPlaceholder(stringResource(SettingsRoute.label), stringResource(R.string.settings_description))
 }

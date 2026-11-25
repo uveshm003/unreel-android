@@ -1,13 +1,28 @@
 package io.github.uveshm003.unreel.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationRailDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuite
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldLayout
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -16,6 +31,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -36,7 +52,8 @@ import io.github.uveshm003.unreel.feature.settings.settingsScreen
 private val destinations = listOf(HomeRoute, AppsRoute, ScheduleRoute, InsightsRoute, SettingsRoute)
 
 @Composable
-fun UnreelApp(modifier: Modifier = Modifier) {
+fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> Unit) {
+    val currentSettings by rememberUpdatedState(settingsContent)
     val navController = rememberNavController()
     val entry by navController.currentBackStackEntryAsState()
     val window = currentWindowAdaptiveInfoV2().windowSizeClass
@@ -46,28 +63,59 @@ fun UnreelApp(modifier: Modifier = Modifier) {
         NavigationSuiteType.NavigationBar
     }
 
-    NavigationSuiteScaffold(
+    val isRail = layout == NavigationSuiteType.NavigationRail
+    val consumedInsets = if (isRail) {
+        NavigationRailDefaults.windowInsets.only(WindowInsetsSides.Start)
+    } else {
+        NavigationBarDefaults.windowInsets.only(WindowInsetsSides.Bottom)
+    }
+    Surface(
         modifier = modifier,
-        layoutType = layout,
-        navigationSuiteItems = {
-            destinations.forEach { route ->
-                item(
-                    selected = entry?.destination?.hierarchy?.any { it.hasRoute(route::class) } == true,
-                    onClick = { navController.selectTab(route) },
-                    icon = { Icon(painterResource(route.icon), contentDescription = null) },
-                    label = { Text(stringResource(route.label), maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                )
-            }
-        },
+        color = NavigationSuiteScaffoldDefaults.containerColor,
+        contentColor = NavigationSuiteScaffoldDefaults.contentColor,
     ) {
-        NavHost(navController, startDestination = HomeRoute, modifier = Modifier.safeDrawingPadding()) {
-            homeScreen()
-            appsScreen()
-            scheduleScreen()
-            insightsScreen()
-            settingsScreen()
+        NavigationSuiteScaffoldLayout(
+            navigationSuiteType = layout,
+            navigationSuite = {
+                val navModifier = if (isRail) {
+                    Modifier.fillMaxHeight()
+                        .background(NavigationSuiteDefaults.colors().navigationRailContainerColor)
+                        .windowInsetsPadding(NavigationRailDefaults.windowInsets)
+                        .verticalScroll(rememberScrollState())
+                } else {
+                    Modifier
+                }
+                NavigationSuite(layoutType = layout, modifier = navModifier) {
+                    destinations.forEach { route ->
+                        item(
+                            selected = entry?.destination?.hierarchy?.any { it.hasRoute(route::class) } == true,
+                            onClick = { navController.selectTab(route) },
+                            icon = { Icon(painterResource(route.icon), contentDescription = null) },
+                            label = {
+                                Text(stringResource(route.label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            },
+                        )
+                    }
+                }
+            },
+        ) {
+            NavHost(
+                navController,
+                startDestination = HomeRoute,
+                modifier = Modifier.consumeWindowInsets(consumedInsets).safeDrawingPadding(),
+            ) {
+                mainDestinations { currentSettings() }
+            }
         }
     }
+}
+
+private fun NavGraphBuilder.mainDestinations(settingsContent: @Composable () -> Unit) {
+    homeScreen()
+    appsScreen()
+    scheduleScreen()
+    insightsScreen()
+    settingsScreen(settingsContent)
 }
 
 internal fun NavHostController.selectTab(route: TopLevelDestination) {
