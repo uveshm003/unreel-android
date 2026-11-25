@@ -10,6 +10,7 @@ android {
 // Only test source sets depend on this module.
 dependencies {
     api(projects.core.common)
+    api(testFixtures(projects.core.common))
     api(projects.core.model)
 
     implementation(projects.core.designsystem)
