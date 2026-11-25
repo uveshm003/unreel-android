@@ -3,5 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
     implementation(projects.core.data)
+    testImplementation(libs.androidx.dataStore.preferences)
 }

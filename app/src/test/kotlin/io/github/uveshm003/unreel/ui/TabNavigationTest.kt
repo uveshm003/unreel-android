@@ -31,7 +31,7 @@ class TabNavigationTest {
             NavHost(controller, startDestination = HomeRoute) {
                 homeScreen()
                 appsScreen()
-                settingsScreen()
+                settingsScreen {}
             }
         }
         compose.runOnIdle {

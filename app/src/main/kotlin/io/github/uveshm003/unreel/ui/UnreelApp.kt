@@ -8,6 +8,7 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffo
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -36,7 +37,8 @@ import io.github.uveshm003.unreel.feature.settings.settingsScreen
 private val destinations = listOf(HomeRoute, AppsRoute, ScheduleRoute, InsightsRoute, SettingsRoute)
 
 @Composable
-fun UnreelApp(modifier: Modifier = Modifier) {
+fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> Unit) {
+    val currentSettings by rememberUpdatedState(settingsContent)
     val navController = rememberNavController()
     val entry by navController.currentBackStackEntryAsState()
     val window = currentWindowAdaptiveInfoV2().windowSizeClass
@@ -65,7 +67,7 @@ fun UnreelApp(modifier: Modifier = Modifier) {
             appsScreen()
             scheduleScreen()
             insightsScreen()
-            settingsScreen()
+            settingsScreen { currentSettings() }
         }
     }
 }

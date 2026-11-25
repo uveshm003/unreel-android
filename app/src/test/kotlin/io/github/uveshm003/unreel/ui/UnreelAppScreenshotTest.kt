@@ -20,7 +20,7 @@ import org.robolectric.annotation.Config
 
 class UnreelAppScreenshotTest : ScreenshotSuite("unreel_app") {
     @Composable
-    override fun Screen() = UnreelApp()
+    override fun Screen() = UnreelApp {}
 
     @Test
     @Config(qualifiers = "w480dp-h220dp-land-notnight-mdpi")
