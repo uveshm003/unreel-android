@@ -6,6 +6,11 @@
         manifest requests it (checkReleaseNoInternetPermission).
     -->
 
+    <queries>
+        <package android:name="com.instagram.android" />
+        <package android:name="com.google.android.youtube" />
+    </queries>
+
     <application
         android:name=".UnreelApplication"
         android:allowBackup="false"
