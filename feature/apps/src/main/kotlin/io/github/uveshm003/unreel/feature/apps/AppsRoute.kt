@@ -1,11 +1,9 @@
 package io.github.uveshm003.unreel.feature.apps
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import io.github.uveshm003.unreel.core.ui.DestinationPlaceholder
 import io.github.uveshm003.unreel.core.ui.TopLevelDestination
 import kotlinx.serialization.Serializable
 
@@ -18,13 +16,8 @@ data object AppsRoute : TopLevelDestination {
 @Serializable
 internal data object AppsOverview
 
-fun NavGraphBuilder.appsScreen() {
+fun NavGraphBuilder.appsScreen(content: @Composable () -> Unit = { AppsDestination() }) {
     navigation<AppsRoute>(startDestination = AppsOverview) {
-        composable<AppsOverview> { AppsScreen() }
+        composable<AppsOverview> { content() }
     }
-}
-
-@Composable
-internal fun AppsScreen() {
-    DestinationPlaceholder(stringResource(AppsRoute.label), stringResource(R.string.apps_description))
 }

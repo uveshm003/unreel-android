@@ -30,7 +30,7 @@ class TabNavigationTest {
             controller = rememberNavController()
             NavHost(controller, startDestination = HomeRoute) {
                 homeScreen()
-                appsScreen()
+                appsScreen {}
                 settingsScreen {}
             }
         }
