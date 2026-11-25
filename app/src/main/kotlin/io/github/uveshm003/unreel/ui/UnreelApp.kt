@@ -31,6 +31,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -103,14 +104,18 @@ fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> 
                 startDestination = HomeRoute,
                 modifier = Modifier.consumeWindowInsets(consumedInsets).safeDrawingPadding(),
             ) {
-                homeScreen()
-                appsScreen()
-                scheduleScreen()
-                insightsScreen()
-                settingsScreen { currentSettings() }
+                mainDestinations { currentSettings() }
             }
         }
     }
+}
+
+private fun NavGraphBuilder.mainDestinations(settingsContent: @Composable () -> Unit) {
+    homeScreen()
+    appsScreen()
+    scheduleScreen()
+    insightsScreen()
+    settingsScreen(settingsContent)
 }
 
 internal fun NavHostController.selectTab(route: TopLevelDestination) {

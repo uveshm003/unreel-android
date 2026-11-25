@@ -10,6 +10,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.WindowCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -50,7 +51,7 @@ class MainActivityTest {
         see(SetupStrings.setup_service)
         see(SetupStrings.setup_next).performClick()
         see(SetupStrings.setup_guides)
-        see(SetupStrings.setup_finish).performClick()
+        see(SetupStrings.setup_finish).performScrollTo().performClick()
         see(HomeStrings.home_description).assertIsDisplayed()
         composeRule.activityRule.scenario.recreate()
         see(HomeStrings.home_description).assertIsDisplayed()
