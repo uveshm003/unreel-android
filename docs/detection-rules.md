@@ -38,3 +38,5 @@ The parser accepts schema version 1. `rulesVersion` is a positive integer for th
 | `not` | Negate the nested `matcher` on the same node. |
 
 Use exact structural evidence from sanitised fixtures. A snapshot supplies bounds, children, identifiers, an optional description and boolean flags. Text from the screen is excluded. Reject malformed files before use.
+
+The engine tests each eligible rule against the root and then its descendants in child order. A structural matcher starts from its current candidate node. A detection can visit up to 512 nodes across all candidate rules and explore 32 edges below the root. Nested searches and revisits count toward the same budget. If evaluation needs to go further, the result is `None`. An incomplete search cannot establish a negative condition or justify selecting a lower-priority rule.
