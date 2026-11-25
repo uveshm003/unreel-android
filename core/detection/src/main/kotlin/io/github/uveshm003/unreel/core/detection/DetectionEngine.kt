@@ -8,6 +8,7 @@ package io.github.uveshm003.unreel.core.detection
  * Traversal uses bounded call frames and indexed child access, without per-node heap allocations.
  */
 class DetectionEngine(files: List<DetectionRules>) {
+    private val tracker = SwipeTracker()
     private val byPackage = buildMap {
         for (file in files) {
             require(file.packageName !in this) { "Duplicate rules file for ${file.packageName}" }
@@ -15,18 +16,22 @@ class DetectionEngine(files: List<DetectionRules>) {
         }
     }
 
+    /** Use one engine per ordered event stream. All position state stays in memory. */
+    @Synchronized
     fun detect(input: DetectionInput): DetectionResult {
         val root = input.root
         val rules = byPackage[input.packageName].orEmpty()
-        if (root != null && rules.isNotEmpty()) {
-            val search = Search()
-            for (rule in rules) {
-                val eligible = rule.versionCode == null || input.versionCode in rule.versionCode
-                if (eligible && search.find(root, rule.match, 0)) return DetectionResult(rule.surface, false, rule.id)
-                if (search.incomplete) break
-            }
+        val search = Search()
+        val rule = root?.let { search.winningRule(it, rules, input.versionCode) }
+        val position = input.scrollPosition
+        val source = rule?.swipeSignal?.source
+        val index = if (position != null && source != null && search.matchesSource(position.source, source)) {
+            position.firstVisibleItem.takeIf { it >= 0 }
+        } else {
+            null
         }
-        return DetectionResult.None
+        val swiped = tracker.observe(input, rule, index)
+        return if (rule == null) DetectionResult.None else DetectionResult(rule.surface, swiped, rule.id)
     }
 }
 
@@ -35,11 +40,19 @@ private const val NODE_BUDGET = 512
 
 private class Search {
     private var remaining = NODE_BUDGET
-    var incomplete = false
-        private set
+    private var incomplete = false
 
-    fun find(node: NodeSnapshot, matcher: Matcher, depth: Int): Boolean =
-        visit(node, matcher, depth, includeDescendants = true)
+    fun winningRule(root: NodeSnapshot, rules: List<DetectionRule>, versionCode: Long): DetectionRule? {
+        for (rule in rules) {
+            val eligible = rule.versionCode == null || versionCode in rule.versionCode
+            if (eligible && visit(root, rule.match, 0, includeDescendants = true)) return rule
+            if (incomplete) break
+        }
+        return null
+    }
+
+    fun matchesSource(node: NodeSnapshot, matcher: Matcher): Boolean =
+        visit(node, matcher, 0, includeDescendants = false)
 
     private fun visit(node: NodeSnapshot, matcher: Matcher, depth: Int, includeDescendants: Boolean): Boolean {
         if (remaining == 0 || depth > MAX_DEPTH) {

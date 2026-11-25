@@ -31,7 +31,12 @@ data class DetectionInput(
     val packageName: String,
     val versionCode: Long,
     val root: NodeSnapshot?,
+    val eventTimeMillis: Long? = null,
+    val scrollPosition: ScrollPosition? = null,
 )
+
+/** An indexed position reported by the pager source. An unavailable index must be omitted. */
+data class ScrollPosition(val source: NodeSnapshot, val firstVisibleItem: Int)
 
 @Serializable
 enum class DetectedSurface { None, ReelsTab, ReelsViewer, ShortsPlayer }
