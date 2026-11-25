@@ -29,6 +29,12 @@ object RulesParser {
             require(rule.surface != DetectedSurface.None) { "Rule ${rule.id}: None is reserved for no match" }
             rule.versionCode?.let { validateRange(it, rule.id) }
             validate(rule.match, rule.id)
+            rule.swipeSignal?.let { signal ->
+                require(rule.surface == DetectedSurface.ReelsViewer || rule.surface == DetectedSurface.ShortsPlayer) {
+                    "Rule ${rule.id}: swipeSignal requires a viewer surface"
+                }
+                validate(signal.source, rule.id)
+            }
         }
         return file
     }

@@ -40,3 +40,9 @@ The parser accepts schema version 1. `rulesVersion` is a positive integer for th
 Use exact structural evidence from sanitised fixtures. A snapshot supplies bounds, children, identifiers, an optional description and boolean flags. Text from the screen is excluded. Reject malformed files before use.
 
 The engine tests each eligible rule against the root and then its descendants in child order. A structural matcher starts from its current candidate node. A detection can visit up to 512 nodes across all candidate rules and explore 32 edges below the root. Nested searches and revisits count toward the same budget. If evaluation needs to go further, the result is `None`. An incomplete search cannot establish a negative condition or justify selecting a lower-priority rule.
+
+### Recognising a move to the next item
+
+A `ReelsViewer` or `ShortsPlayer` rule can declare `"swipeSignal": { "source": { "type": "className", "value": "fixture.Pager" } }`. Match the actual scroll event source, using a pager identity verified by fixtures. Supply the event’s monotonic timestamp and its first visible item index when available. A pixel scroll distance, an inner comments list or a change in visible text cannot establish a new item. Use this signal only for pagers with a reliable indexed position.
+
+Within one viewer the first known position establishes a baseline. A newer `ViewScrolled` event from a matching source emits one swipe if its index advances. The engine ignores duplicate positions, stale events and backwards motion. A new window, package, app version or viewer starts a new baseline. Missing timestamps clear the baseline. Tracking retains only the app, version, rule ID, timestamp and numeric position in memory.

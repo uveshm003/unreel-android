@@ -18,7 +18,11 @@ data class DetectionRule(
     val priority: Int,
     val match: Matcher,
     val versionCode: VersionRange? = null,
+    val swipeSignal: SwipeSignal? = null,
 )
+
+@Serializable
+data class SwipeSignal(val source: Matcher)
 
 @Serializable
 data class VersionRange(val min: Long? = null, val max: Long? = null) {
