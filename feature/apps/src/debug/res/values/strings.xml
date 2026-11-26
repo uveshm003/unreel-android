@@ -1,0 +1,15 @@
+<resources>
+    <string name="apps_description">Per-app preferences below are saved for future protection modes. The Shorts preview has its own switch.</string>
+    <string name="preview_title">YouTube Shorts preview</string>
+    <string name="preview_support">On YouTube 21.18.164, Unreel can press Back when Shorts opens. Other versions and Instagram are outside this preview.</string>
+    <string name="preview_disclosure">Unreel uses Android accessibility access to read the layout of YouTube windows and recognise the Shorts player. When it recognises Shorts, it presses Back. It processes layouts on this device, without reading video titles or messages, storing screen content, or sending it anywhere. You can turn this off here or in Android settings.</string>
+    <string name="preview_agree">I agree</string>
+    <string name="preview_decline">Not now</string>
+    <string name="preview_enable">Set up Shorts protection</string>
+    <string name="preview_disable">Turn off Shorts protection</string>
+    <string name="preview_settings">Open accessibility settings</string>
+    <string name="preview_connected">Service connected</string>
+    <string name="preview_disconnected">In Android settings, enable Unreel Shorts protection.</string>
+    <string name="preview_open_manually">Open Accessibility in Android settings.</string>
+    <string name="preview_error">Protection settings could not be read or saved.</string>
+</resources>

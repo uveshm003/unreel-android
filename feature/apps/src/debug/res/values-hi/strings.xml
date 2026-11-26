@@ -1,0 +1,15 @@
+<resources>
+    <string name="apps_description">नीचे की प्रति-ऐप प्राथमिकताएँ आगामी सुरक्षा मोड के लिए सहेजी जाती हैं। Shorts प्रीव्यू का अपना स्विच है।</string>
+    <string name="preview_title">YouTube Shorts प्रीव्यू</string>
+    <string name="preview_support">YouTube 21.18.164 में Shorts खुलने पर Unreel वापस जा सकता है। दूसरे संस्करण और Instagram इस प्रीव्यू में शामिल नहीं हैं।</string>
+    <string name="preview_disclosure">Unreel, YouTube की विंडो का लेआउट पढ़ने और Shorts प्लेयर पहचानने के लिए Android की सुलभता सेवा का उपयोग करता है। Shorts पहचानने पर यह वापस जाता है। लेआउट इसी डिवाइस पर संसाधित होता है। वीडियो के शीर्षक या संदेश पढ़े नहीं जाते और स्क्रीन की सामग्री सहेजी या भेजी नहीं जाती। आप इसे यहाँ या Android सेटिंग में बंद कर सकते हैं।</string>
+    <string name="preview_agree">मैं सहमत हूँ</string>
+    <string name="preview_decline">अभी नहीं</string>
+    <string name="preview_enable">Shorts सुरक्षा सेट करें</string>
+    <string name="preview_disable">Shorts सुरक्षा बंद करें</string>
+    <string name="preview_settings">सुलभता सेटिंग खोलें</string>
+    <string name="preview_connected">सेवा कनेक्ट है</string>
+    <string name="preview_disconnected">Android सेटिंग में Unreel Shorts सुरक्षा चालू करें।</string>
+    <string name="preview_open_manually">Android सेटिंग में सुलभता खोलें।</string>
+    <string name="preview_error">सुरक्षा सेटिंग पढ़ी या सहेजी नहीं जा सकीं।</string>
+</resources>

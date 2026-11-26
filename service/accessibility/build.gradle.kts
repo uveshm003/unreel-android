@@ -10,3 +10,5 @@ dependencies {
     implementation(projects.core.data)
     implementation(projects.core.detection)
 }
+
+android.sourceSets.getByName("debug").assets.srcDir(rootProject.file("core/detection/src/main/rules"))

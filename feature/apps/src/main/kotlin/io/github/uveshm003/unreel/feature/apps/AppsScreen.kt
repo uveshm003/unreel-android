@@ -59,7 +59,9 @@ internal fun AppsDestination(viewModel: AppsViewModel = hiltViewModel()) {
     LaunchedEffect(viewModel, context) {
         viewModel.errors.collect { Toast.makeText(context, it, Toast.LENGTH_LONG).show() }
     }
-    AppsScreen(state, viewModel::setLevel, viewModel::setBudget, viewModel::setAllowOne, viewModel::retry)
+    AppsScreen(state, viewModel::setLevel, viewModel::setBudget, viewModel::setAllowOne, viewModel::retry) {
+        FeedPreview()
+    }
 }
 
 @Composable
@@ -69,6 +71,7 @@ internal fun AppsScreen(
     setBudget: (ProtectedApp, Int) -> Unit,
     setAllowOne: (ProtectedApp, Boolean) -> Unit,
     retry: () -> Unit,
+    preview: @Composable () -> Unit = {},
 ) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(contentAlignment = Alignment.TopCenter) {
@@ -85,6 +88,7 @@ internal fun AppsScreen(
                     },
                     style = MaterialTheme.typography.headlineMedium,
                 )
+                preview()
                 Text(stringResource(R.string.apps_description))
                 when {
                     state.readFailed -> {

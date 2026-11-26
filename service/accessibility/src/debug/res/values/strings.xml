@@ -1,0 +1,4 @@
+<resources>
+    <string name="feed_service_label">Unreel Shorts protection</string>
+    <string name="feed_service_description">Recognises the Shorts player in supported YouTube versions and presses Back when you turn protection on. Processing stays on this device.</string>
+</resources>

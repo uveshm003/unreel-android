@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "package": "com.google.android.youtube",
+  "rulesVersion": 1,
+  "rules": [{
+    "id": "youtube-shorts-player-1561170057",
+    "surface": "ShortsPlayer",
+    "versionCode": { "min": 1561170057, "max": 1561170057 },
+    "priority": 1,
+    "match": { "type": "all", "matchers": [
+      { "type": "viewId", "value": "com.google.android.youtube:id/reel_watch_fragment_root" },
+      { "type": "flags", "visible": true },
+      { "type": "hasDescendant", "matcher": { "type": "all", "matchers": [
+        { "type": "viewId", "value": "com.google.android.youtube:id/reel_watch_player" },
+        { "type": "flags", "visible": true }
+      ] } }
+    ] }
+  }]
+}

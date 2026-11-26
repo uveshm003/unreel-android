@@ -16,3 +16,5 @@ tasks.register<JavaExec>("sanitiseFixture") {
     mainClass.set("io.github.uveshm003.unreel.core.detection.fixtures.FixtureCliKt")
     workingDir = rootProject.projectDir
 }
+
+sourceSets.test { resources.srcDir("src/main/rules") }
