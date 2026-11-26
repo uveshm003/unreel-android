@@ -9,7 +9,7 @@ minSdk = "29"
 jvmTarget = "17"
 
 # Build tooling (latest stable on Maven Central / Google Maven / Gradle Plugin Portal, checked 2026-11-20)
-androidGradlePlugin = "9.5.1"
+androidGradlePlugin = "9.5.3"
 kotlin = "2.4.21"
 ksp = "2.3.14"
 detekt = "1.23.8"
