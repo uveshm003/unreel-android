@@ -79,6 +79,7 @@ internal fun SetupScreen(
             style = MaterialTheme.typography.labelLarge,
         )
         EmptyState(stringResource(title), stringResource(body))
+        if (step == SetupStep.Guides) BatteryGuidance()
         val action = if (step == SetupStep.Guides) R.string.setup_finish else R.string.setup_next
         PrimaryButton(stringResource(action), { advance(step) })
         if (step == SetupStep.Service) SecondaryButton(stringResource(R.string.setup_skip_tips), skipTips)
