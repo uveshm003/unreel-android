@@ -1,6 +1,6 @@
 # Detection rule format
 
-Each file in `core/detection/src/main/rules/<package>.json` describes one Android package. The example below uses a fictional fixture package and identifiers.
+Each file in `core/detection/src/main/rules/<package>.json` describes one Android package. The example below uses a fictional fixture package and identifiers. [Prepare a sanitised fixture](sanitising-fixtures.md).
 
 ```json
 {

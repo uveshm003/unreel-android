@@ -3,6 +3,7 @@ package io.github.uveshm003.unreel.core.detection
 import java.util.Collections
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class NodeBounds(val left: Int, val top: Int, val right: Int, val bottom: Int)
 
 class NodeSnapshot(

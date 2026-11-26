@@ -9,3 +9,10 @@ dependencies {
     api(projects.core.model)
     implementation(libs.kotlinx.serialization.json)
 }
+
+tasks.register<JavaExec>("sanitiseFixture") {
+    description = "Convert a local XML or JSON snapshot to a sanitised JSON fixture."
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("io.github.uveshm003.unreel.core.detection.fixtures.FixtureCliKt")
+    workingDir = rootProject.projectDir
+}
