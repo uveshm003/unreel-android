@@ -1,4 +1,4 @@
-# 4. Open the system battery optimisation list from onboarding
+# 6. Open the system battery optimisation list from onboarding
 
 - **Status** Proposed
 - **Date** 2026-11-24
