@@ -1,0 +1,17 @@
+<resources>
+    <string name="setup_welcome">Welcome to Unreel</string>
+    <string name="setup_welcome_body">Unreel is designed to block short-form feeds like Reels and Shorts. You can still use the same apps for messages, search and regular videos.</string>
+    <string name="setup_disclosure">How feed detection works</string>
+    <string name="setup_disclosure_body">Feed detection needs accessibility access to recognise the Reels and Shorts screens in Instagram and YouTube. Going through this guide does not grant access.</string>
+    <string name="setup_service">Accessibility setup</string>
+    <string name="setup_service_body">Feed protection is unavailable in this build. You can finish the guide and explore the app with protection off.</string>
+    <string name="setup_guides">Device settings</string>
+    <string name="setup_guides_body">Android may restrict accessibility settings for apps installed outside an app store. Battery settings can also affect background services. You can leave your device settings as they are to explore Unreel.</string>
+    <string name="setup_progress">Step %1$d of %2$d</string>
+    <string name="setup_finish">Explore Unreel</string>
+    <string name="setup_back">Back</string>
+    <string name="setup_next">Continue</string>
+    <string name="setup_storage_error">Setup progress could not be read or saved. Please try again.</string>
+    <string name="setup_retry">Try again</string>
+    <string name="setup_skip_tips">Skip tips and finish</string>
+</resources>

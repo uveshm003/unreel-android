@@ -1,0 +1,26 @@
+<resources>
+    <string name="apps_label">Apps</string>
+    <string name="apps_description">Choose how to handle each feed. Preferences are saved on this device. Feed protection is unavailable in this build.</string>
+    <string name="apps_installed">Installed</string>
+    <string name="apps_not_installed">Not installed</string>
+    <string name="apps_install_unknown">Installation status unavailable</string>
+    <string name="apps_level">%1$s protection</string>
+    <string name="apps_budget">%1$s daily budget</string>
+    <string name="apps_minutes">%1$d min</string>
+    <string name="apps_budget_range">Minutes (1–240)</string>
+    <string name="apps_allow_one">Allow one in %1$s</string>
+    <string name="apps_allow_one_body">Allow a shared short video, then apply protection when you swipe to the next one.</string>
+    <string name="apps_off">Off</string>
+    <string name="apps_pause">Pause</string>
+    <string name="apps_level_budget">Budget</string>
+    <string name="apps_block">Hard block</string>
+    <string name="apps_off_body">Allow the feed without an intervention.</string>
+    <string name="apps_pause_body">Pause before entering the feed.</string>
+    <string name="apps_budget_body">Allow the feed until the daily time limit is reached.</string>
+    <string name="apps_block_body">Leave the feed as soon as it opens.</string>
+    <string name="apps_save">Save</string>
+    <string name="apps_invalid_budget">Enter a budget from 1 to 240 minutes.</string>
+    <string name="apps_save_failed">The change could not be saved.</string>
+    <string name="apps_load_failed">Protection settings could not be loaded.</string>
+    <string name="apps_retry">Try again</string>
+</resources>

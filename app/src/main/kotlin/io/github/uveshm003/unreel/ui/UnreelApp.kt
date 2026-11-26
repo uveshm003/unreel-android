@@ -1,61 +1,134 @@
 package io.github.uveshm003.unreel.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationRailDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuite
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldLayout
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.heading
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
-import io.github.uveshm003.unreel.R
-import io.github.uveshm003.unreel.core.designsystem.theme.UnreelTheme
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import androidx.window.core.layout.WindowSizeClass
+import io.github.uveshm003.unreel.core.ui.TopLevelDestination
+import io.github.uveshm003.unreel.feature.apps.AppsRoute
+import io.github.uveshm003.unreel.feature.apps.appsScreen
+import io.github.uveshm003.unreel.feature.home.HomeRoute
+import io.github.uveshm003.unreel.feature.home.homeScreen
+import io.github.uveshm003.unreel.feature.insights.InsightsRoute
+import io.github.uveshm003.unreel.feature.insights.insightsScreen
+import io.github.uveshm003.unreel.feature.schedule.ScheduleRoute
+import io.github.uveshm003.unreel.feature.schedule.scheduleScreen
+import io.github.uveshm003.unreel.feature.settings.SettingsRoute
+import io.github.uveshm003.unreel.feature.settings.settingsScreen
 
-/** Placeholder app shell. Replaced by the adaptive scaffold + type-safe navigation in the M0 app-shell issue. */
+private val destinations = listOf(HomeRoute, AppsRoute, ScheduleRoute, InsightsRoute, SettingsRoute)
+
 @Composable
-fun UnreelApp(modifier: Modifier = Modifier) {
-    Scaffold(modifier = modifier.fillMaxSize()) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally,
+fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> Unit) {
+    val currentSettings by rememberUpdatedState(settingsContent)
+    val navController = rememberNavController()
+    val entry by navController.currentBackStackEntryAsState()
+    val window = currentWindowAdaptiveInfoV2().windowSizeClass
+    val layout = if (window.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)) {
+        NavigationSuiteType.NavigationRail
+    } else {
+        NavigationSuiteType.NavigationBar
+    }
+
+    val isRail = layout == NavigationSuiteType.NavigationRail
+    val consumedInsets = if (isRail) {
+        NavigationRailDefaults.windowInsets.only(WindowInsetsSides.Start)
+    } else {
+        NavigationBarDefaults.windowInsets.only(WindowInsetsSides.Bottom)
+    }
+    Surface(
+        modifier = modifier,
+        color = NavigationSuiteScaffoldDefaults.containerColor,
+        contentColor = NavigationSuiteScaffoldDefaults.contentColor,
+    ) {
+        NavigationSuiteScaffoldLayout(
+            navigationSuiteType = layout,
+            navigationSuite = {
+                val navModifier = if (isRail) {
+                    Modifier.fillMaxHeight()
+                        .background(NavigationSuiteDefaults.colors().navigationRailContainerColor)
+                        .windowInsetsPadding(NavigationRailDefaults.windowInsets)
+                        .verticalScroll(rememberScrollState())
+                } else {
+                    Modifier
+                }
+                NavigationSuite(layoutType = layout, modifier = navModifier) {
+                    destinations.forEach { route ->
+                        item(
+                            selected = entry?.destination?.hierarchy?.any { it.hasRoute(route::class) } == true,
+                            onClick = { navController.selectTab(route) },
+                            icon = { Icon(painterResource(route.icon), contentDescription = null) },
+                            label = {
+                                Text(stringResource(route.label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                            },
+                        )
+                    }
+                }
+            },
         ) {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.displaySmall,
-                modifier = Modifier.semantics { heading() },
-            )
-            Text(
-                text = stringResource(R.string.app_tagline),
-                style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center,
-            )
-            Text(
-                text = stringResource(R.string.app_shell_placeholder),
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
+            NavHost(
+                navController,
+                startDestination = HomeRoute,
+                modifier = Modifier.consumeWindowInsets(consumedInsets).safeDrawingPadding(),
+            ) {
+                mainDestinations { currentSettings() }
+            }
         }
     }
 }
 
-@PreviewLightDark
-@Composable
-private fun UnreelAppPreview() {
-    UnreelTheme(dynamicColor = false) { UnreelApp() }
+private fun NavGraphBuilder.mainDestinations(settingsContent: @Composable () -> Unit) {
+    homeScreen()
+    appsScreen()
+    scheduleScreen()
+    insightsScreen()
+    settingsScreen(settingsContent)
+}
+
+internal fun NavHostController.selectTab(route: TopLevelDestination) {
+    val currentGraph = currentDestination?.hierarchy?.filterIsInstance<NavGraph>()?.firstOrNull {
+        it.hasRoute(route::class)
+    }
+    if (currentGraph != null) {
+        popBackStack(currentGraph.findStartDestination().id, inclusive = false)
+    } else {
+        navigate(route) {
+            popUpTo(graph.findStartDestination().id) { saveState = true }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
 }

@@ -1,0 +1,26 @@
+<resources>
+    <string name="apps_label">ऐप्स</string>
+    <string name="apps_description">हर ऐप की फ़ीड के लिए विकल्प चुनें। सेटिंग्स इस डिवाइस पर सहेजी जाती हैं। इस संस्करण में फ़ीड सुरक्षा उपलब्ध नहीं है।</string>
+    <string name="apps_installed">इंस्टॉल है</string>
+    <string name="apps_not_installed">इंस्टॉल नहीं है</string>
+    <string name="apps_install_unknown">इंस्टॉल होने की स्थिति उपलब्ध नहीं है</string>
+    <string name="apps_level">%1$s की सुरक्षा</string>
+    <string name="apps_budget">%1$s की दैनिक सीमा</string>
+    <string name="apps_minutes">%1$d मिनट</string>
+    <string name="apps_budget_range">मिनट (1–240)</string>
+    <string name="apps_allow_one">%1$s में एक वीडियो देखने दें</string>
+    <string name="apps_allow_one_body">शेयर किया गया छोटा वीडियो देखने दें। अगले वीडियो पर स्वाइप करने पर सुरक्षा लागू करें।</string>
+    <string name="apps_off">बंद</string>
+    <string name="apps_pause">विराम</string>
+    <string name="apps_level_budget">दैनिक सीमा</string>
+    <string name="apps_block">पूरी रोक</string>
+    <string name="apps_off_body">फ़ीड बिना रुकावट चलने दें।</string>
+    <string name="apps_pause_body">फ़ीड खुलने से पहले विराम दें।</string>
+    <string name="apps_budget_body">दैनिक समय सीमा तक फ़ीड देखने दें।</string>
+    <string name="apps_block_body">फ़ीड खुलते ही उससे बाहर जाएँ।</string>
+    <string name="apps_save">सहेजें</string>
+    <string name="apps_invalid_budget">1 से 240 मिनट तक की सीमा दर्ज करें।</string>
+    <string name="apps_save_failed">बदलाव सहेजा नहीं जा सका।</string>
+    <string name="apps_load_failed">सुरक्षा सेटिंग्स लोड नहीं हो सकीं।</string>
+    <string name="apps_retry">फिर कोशिश करें</string>
+</resources>

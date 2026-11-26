@@ -17,11 +17,12 @@ body:
         - "Missed: Unreel didn't notice a Reels/Shorts feed"
     validations:
       required: true
-  - type: dropdown
+  - type: input
     id: app
     attributes:
       label: App
-      options: ["Instagram", "YouTube", "Other"]
+      description: Which app were you using? If you selected Other in Unreel, enter its name here.
+      placeholder: Instagram or YouTube
     validations:
       required: true
   - type: input
