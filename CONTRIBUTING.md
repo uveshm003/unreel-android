@@ -57,6 +57,10 @@ Fix the cause. If you truly can't, explain why in the PR and open a `tech-debt` 
 - Verify platform APIs against current developer.android.com docs and record significant decisions as ADRs
   in `docs/adr/` ([ADR 0001](docs/adr/0001-record-architecture-decisions.md)).
 
+For screen state and events, follow the [UDF decision](docs/adr/0002-screen-state.md).
+For persistent preferences, protection policy and migrations, follow the
+[storage decision](docs/adr/0003-settings-storage.md).
+
 ## Reporting bugs
 
 Use the **Bug report** or **Detection problem** issue form. Include the device, Android version, Unreel
