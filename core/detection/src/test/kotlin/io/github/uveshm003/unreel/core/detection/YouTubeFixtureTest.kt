@@ -24,6 +24,26 @@ class YouTubeFixtureTest {
         }
     }
 
+    @Test
+    fun service_can_see_the_pager_when_android_omits_its_outer_wrappers() {
+        val capture = Json.decodeFromString<Fixture>(resource("/fixtures/$pkg/$version/shorts.json"))
+        val pager = capture.subtree("$pkg:id/reel_recycler")!!
+        val page = pager.children.single()
+        val input = DetectionInput(DetectionEvent.ContentChanged, pkg, version, pager.snapshot())
+        assertEquals(DetectedSurface.ShortsPlayer, engine.detect(input).surface)
+        val nearMisses = listOf(
+            pager.copy(children = emptyList()),
+            pager.copy(isVisibleToUser = false),
+            pager.copy(children = listOf(page.copy(isVisibleToUser = false))),
+        )
+        for (nearMiss in nearMisses) {
+            assertEquals(
+                DetectionResult.None,
+                engine.detect(input.copy(root = nearMiss.snapshot())),
+            )
+        }
+    }
+
     private fun input(screen: String): DetectionInput {
         val fixture = Json.decodeFromString<Fixture>(resource("/fixtures/$pkg/$version/$screen.json"))
         return DetectionInput(DetectionEvent.WindowStateChanged, pkg, version, fixture.snapshot())
@@ -42,6 +62,14 @@ class YouTubeFixtureTest {
         val bounds: NodeBounds,
         val children: List<Fixture>,
     ) {
+        fun subtree(id: String): Fixture? = if (viewIdResourceName ==
+            id
+        ) {
+            this
+        } else {
+            children.firstNotNullOfOrNull { it.subtree(id) }
+        }
+
         fun snapshot(): NodeSnapshot {
             check(contentDescription == null)
             return NodeSnapshot(
