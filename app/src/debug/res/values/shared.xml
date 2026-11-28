@@ -1,0 +1,7 @@
+<resources>
+    <string name="shared_title">Play with Unreel</string>
+    <string name="shared_invalid">Share a YouTube Shorts link to open it here.</string>
+    <string name="shared_body">Allow one opens this clip in the standard YouTube player. When the exception is off or a focus window is active, the link opens in Shorts with your usual protection.</string>
+    <string name="shared_play">Open in YouTube</string>
+    <string name="shared_error">Could not open the video. Check that YouTube is installed and try again.</string>
+</resources>

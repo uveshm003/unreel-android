@@ -1,4 +1,5 @@
 [versions]
+androidxAppCompat = "1.8.0"
 # SDK levels (checked 2026-11-20 with sdkmanager): Android 17 / API 37 is the latest stable platform and 37.2 its
 # latest stable minor SDK. Compose 1.13 (BOM 2026.11.01) requires compileSdk >= 37.1. targetSdk stays on the major.
 compileSdk = "37"
@@ -53,6 +54,7 @@ truth = "1.4.5"
 turbine = "1.2.1"
 
 [libraries]
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppCompat" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidxBenchmark" }
 androidx-benchmark-micro = { module = "androidx.benchmark:benchmark-junit4", version.ref = "androidxBenchmark" }

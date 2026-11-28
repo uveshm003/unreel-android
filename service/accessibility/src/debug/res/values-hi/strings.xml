@@ -1,0 +1,4 @@
+<resources>
+    <string name="feed_service_label">Unreel Shorts सुरक्षा</string>
+    <string name="feed_service_description">सुरक्षा चालू होने पर यह सेवा समर्थित YouTube संस्करण में Shorts प्लेयर को पहचानकर वापस जाती है। सारी प्रोसेसिंग इसी डिवाइस पर होती है।</string>
+</resources>

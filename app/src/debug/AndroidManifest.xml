@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity android:name=".PauseActivity" android:exported="false" android:excludeFromRecents="true"
+            android:taskAffinity="io.github.uveshm003.unreel.debug.pause" android:noHistory="true">
+            <intent-filter>
+                <action android:name="io.github.uveshm003.unreel.PAUSE_SHORTS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SharedShortActivity" android:label="@string/shared_title" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -1,41 +1,66 @@
 package io.github.uveshm003.unreel.ui
 
-import androidx.compose.ui.test.junit4.v2.createComposeRule
-import androidx.compose.ui.test.onRoot
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.github.takahirom.roborazzi.captureRoboImage
-import io.github.uveshm003.unreel.core.designsystem.theme.UnreelTheme
-import org.junit.Rule
+import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.test.core.app.ApplicationProvider
+import io.github.uveshm003.unreel.core.testing.ScreenshotSuite
+import io.github.uveshm003.unreel.feature.home.R
+import io.github.uveshm003.unreel.feature.settings.SettingsRoute
+import org.junit.Assert.assertFalse
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
-/** Bootstrap screenshot test. The M0 core:testing issue replaces this with shared Roborazzi helpers. */
-@RunWith(AndroidJUnit4::class)
-class UnreelAppScreenshotTest {
-    @get:Rule
-    val composeRule = createComposeRule()
+class UnreelAppScreenshotTest : ScreenshotSuite("unreel_app") {
+    @Composable
+    override fun Screen() = UnreelApp {}
 
     @Test
-    @Config(qualifiers = "w411dp-h891dp-notnight-xxhdpi")
-    fun unreelApp_phone_light() = capture("unreel_app_phone_light", darkTheme = false)
-
-    @Test
-    @Config(qualifiers = "w411dp-h891dp-night-xxhdpi")
-    fun unreelApp_phone_dark() = capture("unreel_app_phone_dark", darkTheme = true)
-
-    @Test
-    @Config(qualifiers = "w1280dp-h800dp-notnight-xhdpi")
-    fun unreelApp_tablet_light() = capture("unreel_app_tablet_light", darkTheme = false)
-
-    @Test
-    @Config(qualifiers = "w1280dp-h800dp-night-xhdpi")
-    fun unreelApp_tablet_dark() = capture("unreel_app_tablet_dark", darkTheme = true)
-
-    private fun capture(name: String, darkTheme: Boolean) {
-        composeRule.setContent {
-            UnreelTheme(darkTheme = darkTheme, dynamicColor = false) { UnreelApp() }
+    @Config(qualifiers = "w720dp-h240dp-land-notnight-mdpi")
+    fun shortRailCanScrollToSettingsAndBackToHome() {
+        setScreenshotContent(darkTheme = false, fontScale = 2f)
+        for (label in listOf(SettingsRoute.label, R.string.home_label)) {
+            val tab = composeRule.onNode(hasText(composeRule.activity.getString(label)) and hasClickAction())
+            tab.performScrollTo().assertIsDisplayed().performTouchInput { click() }
+            tab.assertIsSelected()
         }
-        composeRule.onRoot().captureRoboImage("src/test/screenshots/$name.png")
+        captureCurrentScreen("short_rail_large_font")
     }
+
+    @Test
+    @Config(qualifiers = "w480dp-h220dp-land-notnight-mdpi")
+    fun shortWindow_largeFont_canReadFullDescriptionAndReturnToHeading() {
+        setScreenshotContent(darkTheme = false, fontScale = 2f)
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val description = composeRule.onNodeWithText(context.getString(R.string.home_description))
+        val layouts = mutableListOf<TextLayoutResult>()
+        description.performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(layouts) }
+        assertFalse("The description must lay out every line", layouts.single().didOverflowHeight)
+        description.performScrollTo().assertIsDisplayed()
+        captureCurrentScreen("short_window_large_font")
+        val heading = SemanticsMatcher.keyIsDefined(SemanticsProperties.Heading)
+        composeRule.onNode(
+            hasText(context.getString(R.string.home_label)) and heading,
+        ).performScrollTo().assertIsDisplayed()
+    }
+
+    @Test
+    @Config(qualifiers = "w720dp-h840dp-notnight-xhdpi")
+    fun unfoldedLight() = capture("unfolded_light", darkTheme = false)
+
+    @Test
+    @Config(qualifiers = "w720dp-h840dp-night-xhdpi")
+    fun unfoldedDark() = capture("unfolded_dark", darkTheme = true)
 }

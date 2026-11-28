@@ -9,4 +9,8 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.data)
     implementation(projects.core.detection)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
 }
+
+android.sourceSets.getByName("debug").assets.srcDir(rootProject.file("core/detection/src/main/rules"))

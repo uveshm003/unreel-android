@@ -1,0 +1,11 @@
+<resources>
+    <string name="schedule_label">Schedule</string>
+    <string name="schedule_description">Use Hard block during a daily focus window. Outside these hours, your selected app mode applies.</string>
+    <string name="schedule_daily">Daily focus window</string>
+    <string name="schedule_start">Starts at</string>
+    <string name="schedule_end">Ends at</string>
+    <string name="schedule_off">Schedule is off.</string>
+    <string name="schedule_all_day">Applies all day.</string>
+    <string name="schedule_overnight">Ends the following morning.</string>
+    <string name="schedule_same_day">Starts and ends on the same day.</string>
+</resources>

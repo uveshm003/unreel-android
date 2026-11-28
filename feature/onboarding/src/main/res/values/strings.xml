@@ -1,0 +1,29 @@
+<resources>
+    <string name="setup_welcome">Welcome to Unreel</string>
+    <string name="setup_welcome_body">Unreel is designed to block short-form feeds like Reels and Shorts. You can still use the same apps for messages, search and regular videos.</string>
+    <string name="setup_disclosure">How feed detection works</string>
+    <string name="setup_disclosure_body">Feed detection needs accessibility access to recognise the Reels and Shorts screens in Instagram and YouTube. Going through this guide does not grant access.</string>
+    <string name="setup_service">Accessibility setup</string>
+    <string name="setup_service_body">Feed protection is unavailable in this build. You can finish the guide and explore the app with protection off.</string>
+    <string name="setup_guides">Device settings</string>
+    <string name="setup_guides_body">Android may restrict accessibility settings for apps installed outside an app store. Battery settings can also affect background services. You can leave your device settings as they are to explore Unreel.</string>
+    <string name="setup_progress">Step %1$d of %2$d</string>
+    <string name="setup_finish">Explore Unreel</string>
+    <string name="setup_back">Back</string>
+    <string name="setup_next">Continue</string>
+    <string name="setup_storage_error">Setup progress could not be read or saved. Please try again.</string>
+    <string name="setup_retry">Try again</string>
+    <string name="setup_skip_tips">Skip tips and finish</string>
+    <string name="battery_optimised">Battery optimisation is on for Unreel</string>
+    <string name="battery_exempt">Unreel is exempt from battery optimisation</string>
+    <string name="battery_open_settings">Open battery optimisation settings</string>
+    <string name="battery_learn_more">Read the device guide in your browser</string>
+    <string name="battery_no_settings">Open Settings and search for battery optimisation.</string>
+    <string name="battery_no_browser">A browser is needed to open the device guide.</string>
+    <string name="battery_xiaomi">On Xiaomi, Redmi and POCO phones, look for Background autostart in app settings. You can check whether Unreel is allowed to start in the background.</string>
+    <string name="battery_oppo_realme">In App management, open Unreel and look for Auto launch or Allow background activity under battery usage.</string>
+    <string name="battery_vivo">Look for Autostart in iManager or in app permission settings, then check the entry for Unreel.</string>
+    <string name="battery_oneplus">Open the battery settings for Unreel and look for Allow background activity. The name varies by OxygenOS version.</string>
+    <string name="battery_samsung">In Battery settings, open Background usage limits and check whether Unreel is listed under Sleeping apps or Deep sleeping apps.</string>
+    <string name="battery_generic">In Android’s battery optimisation list, select All apps and find Unreel. Menu names vary by device.</string>
+</resources>

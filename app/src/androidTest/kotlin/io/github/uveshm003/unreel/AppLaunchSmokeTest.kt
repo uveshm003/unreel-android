@@ -1,9 +1,10 @@
 package io.github.uveshm003.unreel
 
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.github.uveshm003.unreel.feature.home.R.string as HomeStrings
+import io.github.uveshm003.unreel.feature.onboarding.R.string as SetupStrings
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,8 +16,17 @@ class AppLaunchSmokeTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun appLaunches_andRendersShell() {
-        val tagline = composeRule.activity.getString(R.string.app_tagline)
-        composeRule.onNodeWithText(tagline).assertIsDisplayed()
+    fun launchesIntoSetupOrTheCompletedShell() {
+        val resources = listOf(
+            SetupStrings.setup_welcome,
+            SetupStrings.setup_disclosure,
+            SetupStrings.setup_service,
+            SetupStrings.setup_guides,
+            HomeStrings.home_description,
+        )
+        val labels = resources.map(composeRule.activity::getString)
+        composeRule.waitUntil(timeoutMillis = 10_000) {
+            labels.any { composeRule.onAllNodesWithText(it).fetchSemanticsNodes().isNotEmpty() }
+        }
     }
 }

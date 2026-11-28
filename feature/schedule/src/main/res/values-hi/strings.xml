@@ -1,0 +1,11 @@
+<resources>
+    <string name="schedule_label">समय-सारणी</string>
+    <string name="schedule_description">हर दिन तय समय पर हार्ड ब्लॉक लगाएँ। बाकी समय ऐप का चुना हुआ मोड लागू होगा।</string>
+    <string name="schedule_daily">दैनिक फ़ोकस अवधि</string>
+    <string name="schedule_start">शुरुआत</string>
+    <string name="schedule_end">समाप्ति</string>
+    <string name="schedule_off">समय-सारणी बंद है।</string>
+    <string name="schedule_all_day">पूरे दिन लागू है।</string>
+    <string name="schedule_overnight">अगले दिन समाप्त होगा।</string>
+    <string name="schedule_same_day">उसी दिन शुरू और समाप्त होगा।</string>
+</resources>
