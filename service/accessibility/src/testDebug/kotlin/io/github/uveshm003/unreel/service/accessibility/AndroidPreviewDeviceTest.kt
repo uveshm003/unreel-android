@@ -21,7 +21,7 @@ class AndroidPreviewDeviceTest {
 
     @Test
     fun installingAndUpdatingYouTubeIsComparedWithTheShippedRule() {
-        val verified = checkNotNull(device.rules?.rules?.single()?.versionCode?.min)
+        val verified = checkNotNull(device.rules?.rules?.maxOfOrNull { checkNotNull(it.versionCode?.min) })
         assertEquals(PreviewCompatibility.Missing, device.compatibility())
         install(verified)
         assertEquals(PreviewCompatibility.Supported(verified), device.compatibility())

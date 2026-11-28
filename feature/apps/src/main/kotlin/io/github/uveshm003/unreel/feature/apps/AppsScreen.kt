@@ -98,7 +98,7 @@ internal fun AppsScreen(
 
                     state.policies.isEmpty() -> CircularProgressIndicator()
 
-                    else -> ProtectedApp.entries.forEach { app ->
+                    else -> listOf(ProtectedApp.YouTube, ProtectedApp.Instagram).forEach { app ->
                         val policy = state.policies.getValue(app.packageName)
                         AppPolicyCard(
                             app,
@@ -128,23 +128,7 @@ private fun AppPolicyCard(
     var editingLevel by rememberSaveable(app) { mutableStateOf(false) }
     var editingBudget by rememberSaveable(app) { mutableStateOf(false) }
     UnreelCard(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            val icon = if (app == ProtectedApp.Instagram) R.drawable.ic_instagram else R.drawable.ic_youtube
-            Image(painterResource(icon), contentDescription = null, modifier = Modifier.size(32.dp))
-            Column(modifier = Modifier.semantics(mergeDescendants = true) { heading() }) {
-                Text(name, style = MaterialTheme.typography.titleMedium)
-                val status = when (installed) {
-                    true -> R.string.apps_installed
-                    false -> R.string.apps_not_installed
-                    null -> R.string.apps_install_unknown
-                }
-                Text(stringResource(status), style = MaterialTheme.typography.bodySmall)
-            }
-        }
+        AppHeader(app, installed)
         SettingsRow(stringResource(R.string.apps_level, name), stringResource(policy.level.label), {
             editingLevel = true
         })
@@ -165,7 +149,15 @@ private fun AppPolicyCard(
             stringResource(R.string.apps_allow_one, name),
             policy.allowOneBlockScroll,
             setAllowOne,
-            subtitle = stringResource(R.string.apps_allow_one_body),
+            subtitle = stringResource(
+                if (app ==
+                    ProtectedApp.YouTube
+                ) {
+                    R.string.apps_youtube_allow_one
+                } else {
+                    R.string.apps_allow_one_body
+                },
+            ),
         )
     }
     if (editingLevel) {
@@ -178,6 +170,30 @@ private fun AppPolicyCard(
         BudgetEditor(name, policy.dailyBudgetMinutes, { editingBudget = false }) {
             editingBudget = false
             setBudget(it)
+        }
+    }
+}
+
+@Composable
+private fun AppHeader(app: ProtectedApp, installed: Boolean?) {
+    Row(
+        Modifier.padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        val icon = if (app == ProtectedApp.Instagram) R.drawable.ic_instagram else R.drawable.ic_youtube
+        Image(painterResource(icon), contentDescription = null, modifier = Modifier.size(32.dp))
+        Column(modifier = Modifier.semantics(mergeDescendants = true) { heading() }) {
+            Text(app.name, style = MaterialTheme.typography.titleMedium)
+            val status = when (installed) {
+                true -> R.string.apps_installed
+                false -> R.string.apps_not_installed
+                null -> R.string.apps_install_unknown
+            }
+            Text(stringResource(status), style = MaterialTheme.typography.bodySmall)
+            if (app == ProtectedApp.Instagram) {
+                Text(stringResource(R.string.apps_instagram_status), style = MaterialTheme.typography.bodySmall)
+            }
         }
     }
 }

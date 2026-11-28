@@ -53,6 +53,7 @@ fun SettingsScreen(
     setDynamicColor: (Boolean) -> Unit,
     retry: () -> Unit,
     modifier: Modifier = Modifier,
+    export: (android.net.Uri) -> Unit = {},
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
         Box(contentAlignment = Alignment.TopCenter) {
@@ -94,10 +95,7 @@ fun SettingsScreen(
                 AboutSettings(version)
                 SectionHeading(R.string.settings_data)
                 ReportProblemAction(version)
-                Text(stringResource(R.string.settings_planned), style = MaterialTheme.typography.bodyMedium)
-                listOf(R.string.settings_export, R.string.settings_reset).forEach { label ->
-                    TextButton(onClick = {}, enabled = false) { Text(stringResource(label)) }
-                }
+                DataActions(export)
             }
         }
     }

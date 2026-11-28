@@ -19,6 +19,7 @@ import io.github.uveshm003.unreel.ui.UnreelApp
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val activity by viewModels<ActivityViewModel>()
     private val settings by viewModels<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +36,43 @@ class MainActivity : AppCompatActivity() {
             }
             UnreelTheme(darkTheme = darkTheme, dynamicColor = state.appearance.dynamicColor) {
                 OnboardingGate {
-                    UnreelApp {
+                    val summary by activity.summary.collectAsStateWithLifecycle()
+                    androidx.compose.runtime.LaunchedEffect(activity) {
+                        activity.errors.collect {
+                            android.widget.Toast.makeText(
+                                this@MainActivity,
+                                io.github.uveshm003.unreel.feature.apps.R.string.apps_save_failed,
+                                android.widget.Toast.LENGTH_LONG,
+                            ).show()
+                        }
+                    }
+                    androidx.compose.runtime.LaunchedEffect(activity) {
+                        activity.exports.collect { ok ->
+                            val message = if (ok) {
+                                io.github.uveshm003.unreel.feature.settings.R.string.settings_export_done
+                            } else {
+                                io.github.uveshm003.unreel.feature.settings.R.string.settings_export_error
+                            }
+                            android.widget.Toast.makeText(
+                                this@MainActivity,
+                                message,
+                                android.widget.Toast.LENGTH_LONG,
+                            ).show()
+                        }
+                    }
+                    UnreelApp(
+                        summary = summary,
+                        enableSchedule = activity::enable,
+                        setTime = activity::setTime,
+                        protectionStatus = { io.github.uveshm003.unreel.feature.apps.FeedPreview() },
+                    ) {
                         SettingsScreen(
                             state,
                             BuildConfig.VERSION_NAME,
                             settings::setTheme,
                             settings::setDynamicColor,
                             settings::retry,
+                            export = activity::export,
                         )
                     }
                 }

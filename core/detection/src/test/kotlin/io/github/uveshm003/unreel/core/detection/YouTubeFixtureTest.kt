@@ -11,6 +11,17 @@ class YouTubeFixtureTest {
     private val engine = DetectionEngine(listOf(RulesParser.parse(resource("/$pkg.json"))))
 
     @Test
+    fun samsungYouTubeOnlyMatchesShortsOnTheVerifiedBuild() {
+        val samsung = 1561314006L
+        val viewer = input("shorts", samsung)
+        assertEquals(DetectedSurface.ShortsPlayer, engine.detect(viewer).surface)
+        assertEquals(DetectionResult.None, engine.detect(viewer.copy(versionCode = samsung + 1)))
+        for (screen in listOf("home", "regular")) {
+            assertEquals(DetectionResult.None, engine.detect(input(screen, samsung)), screen)
+        }
+    }
+
+    @Test
     fun shorts_matches_only_the_captured_version_and_viewer() {
         val viewer = input("shorts")
         assertEquals(DetectedSurface.ShortsPlayer, engine.detect(viewer).surface)
@@ -19,6 +30,7 @@ class YouTubeFixtureTest {
         for (screen in listOf(
             "home",
             "regular",
+            "shared-watch",
         )) {
             assertEquals(DetectionResult.None, engine.detect(input(screen)), screen)
         }
@@ -44,7 +56,7 @@ class YouTubeFixtureTest {
         }
     }
 
-    private fun input(screen: String): DetectionInput {
+    private fun input(screen: String, version: Long = this.version): DetectionInput {
         val fixture = Json.decodeFromString<Fixture>(resource("/fixtures/$pkg/$version/$screen.json"))
         return DetectionInput(DetectionEvent.WindowStateChanged, pkg, version, fixture.snapshot())
     }

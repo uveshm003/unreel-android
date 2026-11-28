@@ -1,0 +1,7 @@
+<resources>
+    <string name="pause_title">एक साँस लें</string>
+    <string name="pause_body">Shorts बंद है। अभी वापस जाएँ, या पाँच मिनट की अनुमति के लिए दस सेकंड प्रतीक्षा करें।</string>
+    <string name="pause_leave">वापस जाएँ</string>
+    <string name="pause_allow">5 मिनट की अनुमति दें</string>
+    <string name="pause_wait">%1$d सेकंड प्रतीक्षा करें</string>
+</resources>

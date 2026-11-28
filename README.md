@@ -8,9 +8,11 @@ from pulling you into endless scrolling, while DMs, search, normal videos and up
 
 ## Try the debug MVP
 
-The debug APK includes an opt-in Shorts blocker for YouTube **21.18.164** (Android version code `1561170057`). After onboarding, **Apps** checks the installed YouTube build against the bundled detection rule. Unsupported builds show their installed version and build number. On a supported install, tap **Set up Shorts protection**, read the disclosure, and choose **I agree**. Open Android accessibility settings and enable **Unreel Shorts protection**. The Apps screen shows when the service connects. Return to Apps and tap **Turn off Shorts protection** to stop blocking.
+The debug APK includes an opt-in Shorts blocker for YouTube **21.18.164** (`1561170057`) and **21.46.522** (`1561314006`). After onboarding, **Apps** checks the installed YouTube build against the bundled detection rule. Unsupported builds show their installed version and build number. On a supported install, tap **Set up Shorts protection**, read the disclosure, and choose **I agree**. Open Android accessibility settings and enable **Unreel Shorts protection**. The Apps screen shows when the service connects. Return to Apps and tap **Turn off Shorts protection** to stop blocking.
 
-The preview presses Back when it recognises the Shorts player. It skips other YouTube versions. The Instagram, Pause, Budget and allow-one controls currently save preferences for later implementation. This preview runs locally and reads structural identifiers and bounds. It discards snapshots after evaluating the window.
+Choose **Hard block** to leave Shorts immediately, **Pause** for a ten-second break with an optional five-minute pass, **Budget** for a daily viewing limit, or **Off**. Schedule can raise the mode to Hard block during a daily focus window, including overnight. Home and Insights show local activity totals. In Settings you can export them with your preferences or reset the app.
+
+To watch one shared clip, share its YouTube Shorts link to **Play with Unreel**, then tap **Open in YouTube**. With Allow one enabled, this opens the clip in the standard player. Opening a link directly in YouTube follows the usual feed rules. Instagram enforcement still needs verified Reels fixtures. The release build does not include the accessibility service.
 
 Build with `./gradlew assembleDebug` or download `unreel-debug-apk` from the integration PR’s CI run. [Integration PR and builds](https://github.com/uveshm003/unreel-android/pull/86)
 

@@ -1,4 +1,7 @@
 <resources>
     <string name="insights_label">Insights</string>
-    <string name="insights_description">See how your time in short-form feeds changes from day to day.</string>
+    <string name="insights_description">Your Shorts activity over the last seven days.</string>
+    <string name="insights_week">Times Unreel closed Shorts</string>
+    <string name="insights_empty">Activity appears here after you enable Shorts protection and open the feed.</string>
+    <string name="insights_day">%1$d exits · %2$d min in Shorts</string>
 </resources>

@@ -31,12 +31,12 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
+import io.github.uveshm003.unreel.core.data.ProtectionSummary
 import io.github.uveshm003.unreel.core.ui.TopLevelDestination
 import io.github.uveshm003.unreel.feature.apps.AppsRoute
 import io.github.uveshm003.unreel.feature.apps.appsScreen
@@ -48,14 +48,23 @@ import io.github.uveshm003.unreel.feature.schedule.ScheduleRoute
 import io.github.uveshm003.unreel.feature.schedule.scheduleScreen
 import io.github.uveshm003.unreel.feature.settings.SettingsRoute
 import io.github.uveshm003.unreel.feature.settings.settingsScreen
+import java.time.LocalTime
 
 private val destinations = listOf(HomeRoute, AppsRoute, ScheduleRoute, InsightsRoute, SettingsRoute)
 
 @Composable
-fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> Unit) {
+fun UnreelApp(
+    modifier: Modifier = Modifier,
+    summary: ProtectionSummary? = null,
+    enableSchedule: (Boolean) -> Unit = {},
+    setTime: (Boolean, LocalTime) -> Unit = { _, _ -> },
+    protectionStatus: @Composable () -> Unit = {},
+    settingsContent: @Composable () -> Unit,
+) {
+    val currentSummary by rememberUpdatedState(summary)
+    val currentStatus by rememberUpdatedState(protectionStatus)
     val currentSettings by rememberUpdatedState(settingsContent)
     val navController = rememberNavController()
-    val entry by navController.currentBackStackEntryAsState()
     val window = currentWindowAdaptiveInfoV2().windowSizeClass
     val layout = if (window.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)) {
         NavigationSuiteType.NavigationRail
@@ -77,26 +86,7 @@ fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> 
         NavigationSuiteScaffoldLayout(
             navigationSuiteType = layout,
             navigationSuite = {
-                val navModifier = if (isRail) {
-                    Modifier.fillMaxHeight()
-                        .background(NavigationSuiteDefaults.colors().navigationRailContainerColor)
-                        .windowInsetsPadding(NavigationRailDefaults.windowInsets)
-                        .verticalScroll(rememberScrollState())
-                } else {
-                    Modifier
-                }
-                NavigationSuite(layoutType = layout, modifier = navModifier) {
-                    destinations.forEach { route ->
-                        item(
-                            selected = entry?.destination?.hierarchy?.any { it.hasRoute(route::class) } == true,
-                            onClick = { navController.selectTab(route) },
-                            icon = { Icon(painterResource(route.icon), contentDescription = null) },
-                            label = {
-                                Text(stringResource(route.label), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                            },
-                        )
-                    }
-                }
+                DestinationNavigation(layout, navController)
             },
         ) {
             NavHost(
@@ -104,18 +94,41 @@ fun UnreelApp(modifier: Modifier = Modifier, settingsContent: @Composable () -> 
                 startDestination = HomeRoute,
                 modifier = Modifier.consumeWindowInsets(consumedInsets).safeDrawingPadding(),
             ) {
-                mainDestinations { currentSettings() }
+                homeScreen({
+                    currentSummary?.days?.firstOrNull()
+                }, { navController.selectTab(AppsRoute) }) { currentStatus() }
+                appsScreen()
+                scheduleScreen({ currentSummary?.window }, enableSchedule, setTime)
+                insightsScreen { currentSummary?.days.orEmpty() }
+                settingsScreen { currentSettings() }
             }
         }
     }
 }
 
-private fun NavGraphBuilder.mainDestinations(settingsContent: @Composable () -> Unit) {
-    homeScreen()
-    appsScreen()
-    scheduleScreen()
-    insightsScreen()
-    settingsScreen(settingsContent)
+@Composable
+private fun DestinationNavigation(layout: NavigationSuiteType, navController: NavHostController) {
+    val entry by navController.currentBackStackEntryAsState()
+    val navModifier = if (layout == NavigationSuiteType.NavigationRail) {
+        Modifier.fillMaxHeight()
+            .background(NavigationSuiteDefaults.colors().navigationRailContainerColor)
+            .windowInsetsPadding(NavigationRailDefaults.windowInsets)
+            .verticalScroll(rememberScrollState())
+    } else {
+        Modifier
+    }
+    NavigationSuite(layoutType = layout, modifier = navModifier) {
+        destinations.forEach { route ->
+            item(
+                selected = entry?.destination?.hierarchy?.any { it.hasRoute(route::class) } == true,
+                onClick = { navController.selectTab(route) },
+                icon = { Icon(painterResource(route.icon), contentDescription = null) },
+                label = {
+                    Text(stringResource(route.label), maxLines = 1, overflow = TextOverflow.Ellipsis)
+                },
+            )
+        }
+    }
 }
 
 internal fun NavHostController.selectTab(route: TopLevelDestination) {

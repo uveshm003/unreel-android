@@ -19,11 +19,19 @@ class FeedPreviewRepository @Inject constructor(private val store: DataStore<Pre
     val connected = connection.asStateFlow()
     val enabled = store.data.map { it[version] == CURRENT_DISCLOSURE && it[acceptedAt] != null }.distinctUntilChanged()
 
+    @Volatile private var passUntil = 0L
+    fun allowFiveMinutes() {
+        passUntil = android.os.SystemClock.elapsedRealtime() + FIVE_MINUTES
+    }
+    fun remainingPass(): Long = (passUntil - android.os.SystemClock.elapsedRealtime()).coerceAtLeast(0L)
+
     fun connectionChanged(connected: Boolean) {
         connection.value = connected
+        if (!connected) passUntil = 0L
     }
 
     suspend fun setEnabled(enabled: Boolean) {
+        if (!enabled) passUntil = 0L
         store.edit {
             if (enabled) {
                 it[version] = CURRENT_DISCLOSURE
@@ -36,7 +44,8 @@ class FeedPreviewRepository @Inject constructor(private val store: DataStore<Pre
     }
 
     private companion object {
-        const val CURRENT_DISCLOSURE = 1
+        const val CURRENT_DISCLOSURE = 2
+        const val FIVE_MINUTES = 300_000L
         val version = intPreferencesKey("feed_preview_consent_version")
         val acceptedAt = longPreferencesKey("feed_preview_accepted_at")
     }

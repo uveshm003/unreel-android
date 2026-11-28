@@ -1,4 +1,7 @@
 <resources>
     <string name="insights_label">आँकड़े</string>
-    <string name="insights_description">देखें कि छोटी वीडियो की फ़ीड पर बिताया समय रोज़ कैसे बदलता है।</string>
+    <string name="insights_description">पिछले सात दिनों में आपकी Shorts गतिविधि।</string>
+    <string name="insights_week">Unreel ने कितनी बार Shorts बंद किया</string>
+    <string name="insights_empty">Shorts सुरक्षा चालू करने और फ़ीड खोलने के बाद यहाँ गतिविधि दिखेगी।</string>
+    <string name="insights_day">%1$d बार बंद · Shorts में %2$d मिनट</string>
 </resources>

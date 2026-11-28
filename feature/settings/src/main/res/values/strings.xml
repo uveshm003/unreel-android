@@ -29,4 +29,8 @@
     <string name="report_copy">Copy report link</string>
     <string name="report_other">Other app</string>
     <string name="report_unreel_version">Unreel version: %1$s</string>
+    <string name="settings_export_done">Export saved</string>
+    <string name="settings_export_error">Could not write the export. Choose another location and try again.</string>
+    <string name="settings_reset_detail">Erase app settings, protection consent and activity history on this device? Unreel will close.</string>
+    <string name="settings_reset_error">Could not erase app data.</string>
 </resources>

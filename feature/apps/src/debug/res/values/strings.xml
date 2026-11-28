@@ -1,8 +1,8 @@
 <resources>
-    <string name="apps_description">Per-app preferences below are saved for future protection modes. The Shorts preview has its own switch.</string>
-    <string name="preview_title">YouTube Shorts preview</string>
-    <string name="preview_support">The installed YouTube version is supported. Enabling protection makes Unreel press Back when Shorts opens.</string>
-    <string name="preview_disclosure">Unreel uses Android accessibility access to read the layout of YouTube windows and recognise the Shorts player. When it recognises Shorts, it presses Back. It processes layouts on this device, without reading video titles or messages, storing screen content, or sending it anywhere. You can turn this off here or in Android settings.</string>
+    <string name="apps_description">Choose how Unreel handles YouTube Shorts.</string>
+    <string name="preview_title">YouTube Shorts</string>
+    <string name="preview_support">Your installed version supports Shorts protection.</string>
+    <string name="preview_disclosure">With your permission, Unreel reads layout identifiers in YouTube to recognise Shorts. Depending on your mode and schedule, it can press Back and show a pause screen. Unreel keeps daily totals for time in Shorts and exits for seven days on this device. It never stores screen content or reads titles or messages. Turn it off here or in Android accessibility settings.</string>
     <string name="preview_agree">I agree</string>
     <string name="preview_decline">Not now</string>
     <string name="preview_enable">Set up Shorts protection</string>
@@ -19,4 +19,5 @@
     <string name="preview_unsupported_build">YouTube build %1$d has no verified Shorts rule. Protection is unavailable for this build.</string>
     <string name="preview_waiting">Enabled in Android settings. Waiting for the service to connect.</string>
     <string name="preview_status_unknown">Unreel could not read the service status. You can check it in Android accessibility settings.</string>
+    <string name="apps_youtube_allow_one">Share a Shorts link to Play with Unreel to watch one clip in the standard player.</string>
 </resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="pause_title">Take a breath</string>
+    <string name="pause_body">Shorts is closed. Leave now, or wait ten seconds to allow Shorts for five minutes.</string>
+    <string name="pause_leave">Go back</string>
+    <string name="pause_allow">Allow 5 minutes</string>
+    <string name="pause_wait">Wait %1$d s</string>
+</resources>

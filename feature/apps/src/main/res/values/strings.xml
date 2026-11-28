@@ -23,4 +23,6 @@
     <string name="apps_save_failed">The change could not be saved.</string>
     <string name="apps_load_failed">Protection settings could not be loaded.</string>
     <string name="apps_retry">Try again</string>
+    <string name="apps_youtube_allow_one">Allow one shared clip before applying protection.</string>
+    <string name="apps_instagram_status">Reels detection is unavailable. Preferences are saved for this app.</string>
 </resources>

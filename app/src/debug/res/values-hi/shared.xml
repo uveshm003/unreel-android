@@ -1,0 +1,7 @@
+<resources>
+    <string name="shared_title">Unreel से चलाएँ</string>
+    <string name="shared_invalid">यहाँ खोलने के लिए YouTube Shorts का लिंक साझा करें।</string>
+    <string name="shared_body">एक की अनुमति होने पर यह क्लिप YouTube के सामान्य प्लेयर में खुलती है। छूट बंद होने या फ़ोकस अवधि में यह आपकी चुनी हुई सुरक्षा के साथ Shorts में खुलती है।</string>
+    <string name="shared_play">YouTube में खोलें</string>
+    <string name="shared_error">वीडियो नहीं खुला। जाँचें कि YouTube इंस्टॉल है और फिर कोशिश करें।</string>
+</resources>

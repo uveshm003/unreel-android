@@ -29,4 +29,8 @@
     <string name="report_copy">रिपोर्ट लिंक कॉपी करें</string>
     <string name="report_other">दूसरा ऐप</string>
     <string name="report_unreel_version">Unreel संस्करण: %1$s</string>
+    <string name="settings_export_done">निर्यात सहेजा गया</string>
+    <string name="settings_export_error">निर्यात सहेजा नहीं जा सका। दूसरी जगह चुनकर फिर कोशिश करें।</string>
+    <string name="settings_reset_detail">इस डिवाइस पर ऐप सेटिंग, सुरक्षा की सहमति और गतिविधि का इतिहास मिटाएँ? Unreel बंद हो जाएगा।</string>
+    <string name="settings_reset_error">ऐप का डेटा मिटाया नहीं जा सका।</string>
 </resources>

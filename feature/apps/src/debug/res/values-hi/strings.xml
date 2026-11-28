@@ -1,8 +1,8 @@
 <resources>
-    <string name="apps_description">नीचे की प्रति-ऐप प्राथमिकताएँ आगामी सुरक्षा मोड के लिए सहेजी जाती हैं। Shorts प्रीव्यू का अपना स्विच है।</string>
-    <string name="preview_title">YouTube Shorts प्रीव्यू</string>
-    <string name="preview_support">इंस्टॉल किया गया YouTube संस्करण समर्थित है। सुरक्षा चालू करने पर Shorts खुलते ही Unreel वापस जाता है।</string>
-    <string name="preview_disclosure">Unreel, YouTube की विंडो का लेआउट पढ़ने और Shorts प्लेयर पहचानने के लिए Android की सुलभता सेवा का उपयोग करता है। Shorts पहचानने पर यह वापस जाता है। लेआउट इसी डिवाइस पर संसाधित होता है। वीडियो के शीर्षक या संदेश पढ़े नहीं जाते और स्क्रीन की सामग्री सहेजी या भेजी नहीं जाती। आप इसे यहाँ या Android सेटिंग में बंद कर सकते हैं।</string>
+    <string name="apps_description">YouTube Shorts के लिए सुरक्षा मोड चुनें।</string>
+    <string name="preview_title">YouTube Shorts</string>
+    <string name="preview_support">इस YouTube संस्करण में Shorts सुरक्षा उपलब्ध है।</string>
+    <string name="preview_disclosure">आपकी अनुमति से Unreel, YouTube की स्क्रीन की संरचना से Shorts पहचानता है। आपके मोड और समय-सारणी के अनुसार यह वापस जा सकता है और विराम की स्क्रीन दिखा सकता है। Shorts का समय और बाहर जाने की दैनिक गिनती इसी डिवाइस पर सात दिनों तक सहेजी जाती है। स्क्रीन की सामग्री सहेजी नहीं जाती और शीर्षक या संदेश पढ़े नहीं जाते। आप इसे यहाँ या Android की सुलभता सेटिंग में बंद कर सकते हैं।</string>
     <string name="preview_agree">मैं सहमत हूँ</string>
     <string name="preview_decline">अभी नहीं</string>
     <string name="preview_enable">Shorts सुरक्षा सेट करें</string>
@@ -19,4 +19,5 @@
     <string name="preview_unsupported_build">YouTube बिल्ड %1$d के लिए कोई सत्यापित Shorts नियम उपलब्ध नहीं है। इस बिल्ड पर सुरक्षा उपलब्ध नहीं है।</string>
     <string name="preview_waiting">Android सेटिंग में सेवा चालू है। कनेक्शन की प्रतीक्षा हो रही है।</string>
     <string name="preview_status_unknown">Unreel सेवा की स्थिति नहीं पढ़ सका। आप इसे Android की सुलभता सेटिंग में देख सकते हैं।</string>
+    <string name="apps_youtube_allow_one">एक क्लिप सामान्य प्लेयर में देखने के लिए Shorts का लिंक Unreel से चलाएँ पर साझा करें।</string>
 </resources>
