@@ -1,7 +1,7 @@
 <resources>
     <string name="apps_description">नीचे की प्रति-ऐप प्राथमिकताएँ आगामी सुरक्षा मोड के लिए सहेजी जाती हैं। Shorts प्रीव्यू का अपना स्विच है।</string>
     <string name="preview_title">YouTube Shorts प्रीव्यू</string>
-    <string name="preview_support">YouTube 21.18.164 में Shorts खुलने पर Unreel वापस जा सकता है। दूसरे संस्करण और Instagram इस प्रीव्यू में शामिल नहीं हैं।</string>
+    <string name="preview_support">इंस्टॉल किया गया YouTube संस्करण समर्थित है। सुरक्षा चालू करने पर Shorts खुलते ही Unreel वापस जाता है।</string>
     <string name="preview_disclosure">Unreel, YouTube की विंडो का लेआउट पढ़ने और Shorts प्लेयर पहचानने के लिए Android की सुलभता सेवा का उपयोग करता है। Shorts पहचानने पर यह वापस जाता है। लेआउट इसी डिवाइस पर संसाधित होता है। वीडियो के शीर्षक या संदेश पढ़े नहीं जाते और स्क्रीन की सामग्री सहेजी या भेजी नहीं जाती। आप इसे यहाँ या Android सेटिंग में बंद कर सकते हैं।</string>
     <string name="preview_agree">मैं सहमत हूँ</string>
     <string name="preview_decline">अभी नहीं</string>
@@ -12,4 +12,11 @@
     <string name="preview_disconnected">Android सेटिंग में Unreel Shorts सुरक्षा चालू करें।</string>
     <string name="preview_open_manually">Android सेटिंग में सुलभता खोलें।</string>
     <string name="preview_error">सुरक्षा सेटिंग पढ़ी या सहेजी नहीं जा सकीं।</string>
+    <string name="preview_checking">इंस्टॉल किए गए YouTube संस्करण की जाँच हो रही है…</string>
+    <string name="preview_youtube_missing">इस डिवाइस पर YouTube इंस्टॉल नहीं है।</string>
+    <string name="preview_unknown">Unreel इस डिवाइस पर Shorts सुरक्षा की उपलब्धता की जाँच नहीं कर सका।</string>
+    <string name="preview_unsupported_version">YouTube %1$s (बिल्ड %2$d) के लिए कोई सत्यापित Shorts नियम उपलब्ध नहीं है। इस संस्करण पर सुरक्षा उपलब्ध नहीं है।</string>
+    <string name="preview_unsupported_build">YouTube बिल्ड %1$d के लिए कोई सत्यापित Shorts नियम उपलब्ध नहीं है। इस बिल्ड पर सुरक्षा उपलब्ध नहीं है।</string>
+    <string name="preview_waiting">Android सेटिंग में सेवा चालू है। कनेक्शन की प्रतीक्षा हो रही है।</string>
+    <string name="preview_status_unknown">Unreel सेवा की स्थिति नहीं पढ़ सका। आप इसे Android की सुलभता सेटिंग में देख सकते हैं।</string>
 </resources>

@@ -8,7 +8,7 @@ from pulling you into endless scrolling, while DMs, search, normal videos and up
 
 ## Try the debug MVP
 
-The debug APK includes an opt-in Shorts blocker for YouTube **21.18.164** (Android version code `1561170057`). Finish onboarding, open **Apps → Set up Shorts protection**, read the disclosure, and choose **I agree**. Open Android accessibility settings and enable **Unreel Shorts protection**. The Apps screen shows when the service connects. Return to Apps and tap **Turn off Shorts protection** to stop blocking.
+The debug APK includes an opt-in Shorts blocker for YouTube **21.18.164** (Android version code `1561170057`). After onboarding, **Apps** checks the installed YouTube build against the bundled detection rule. Unsupported builds show their installed version and build number. On a supported install, tap **Set up Shorts protection**, read the disclosure, and choose **I agree**. Open Android accessibility settings and enable **Unreel Shorts protection**. The Apps screen shows when the service connects. Return to Apps and tap **Turn off Shorts protection** to stop blocking.
 
 The preview presses Back when it recognises the Shorts player. It skips other YouTube versions. The Instagram, Pause, Budget and allow-one controls currently save preferences for later implementation. This preview runs locally and reads structural identifiers and bounds. It discards snapshots after evaluating the window.
 
